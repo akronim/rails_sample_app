@@ -2,8 +2,9 @@
 <html>
 
 <head>
-    <%# insert the title into the template %>
-    <title><%= yield(:page_title) %> | Ruby on Rails Tutorial Sample App</title>
+    <%# insert the title into the template; 
+    - this relies on the definition of a page title (using provide ) in each view %>
+    <title><%= full_title(yield(:page_title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
