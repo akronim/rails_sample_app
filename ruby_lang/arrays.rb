@@ -56,6 +56,15 @@ class Test
 
     pp ('a'..'e').to_a
   end
+
+  def method_2  
+    addresses = %w[USER@foo.COM THE_US-ER@foo.bar.org first.last@foo.jp]
+    pp addresses
+
+    addresses.each do |address|
+      puts address
+    end
+  end
 end
 
 Test.new
