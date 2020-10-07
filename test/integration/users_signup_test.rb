@@ -13,6 +13,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     # check that a failed submission re-renders the new action
     assert_template "users/new"
+    assert_select "div#error_explanation"
+    assert_select "div.field_with_errors"
+    assert_select "ul > li"
   end
 
   test "valid signup information" do
@@ -28,5 +31,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       follow_redirect!
     end
     assert_template "users/show"
+    assert_not flash.nil?
   end
 end
