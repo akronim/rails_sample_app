@@ -28,5 +28,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       follow_redirect!
     end
     assert_template "users/show"
+    assert is_logged_in? # defined in test/test_helper.rb
   end
 end
