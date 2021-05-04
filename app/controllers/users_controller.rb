@@ -22,10 +22,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  # The update_attributes method accepts a hash of attributes, and on success
+  # performs both the update and the save in one step (returning true to indicate
+  # that the save went through).
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      # Handle a successful update.
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render "edit"
+    end
+  end
+
   private
 
   def user_params
-    # we require the params hash to have a :user attribute, and we want 
+    # we require the params hash to have a :user attribute, and we want
     # to permit the name, email, password, and password confirmation attributes
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)
