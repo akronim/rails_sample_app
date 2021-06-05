@@ -7,6 +7,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @other_user = users(:archer)
   end
 
+  test "should redirect index when not logged in" do
+    # get :index # nok
+    get '/users' # ok
+    # get users_path # ok
+    assert_redirected_to login_url
+  end
+
   test "should get new" do
     #get :new # nok
     #get signup_path # ok
@@ -41,7 +48,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@other_user)
     #patch :update, params: { id: @user, user: { name: @user.name, email: @user.email } }
     patch user_path(@user), params: { user: { name: @user.name,
-                                         email: @user.email } }
+                                             email: @user.email } }
     assert flash.empty?
     assert_redirected_to root_url
   end
